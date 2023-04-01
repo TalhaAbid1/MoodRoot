@@ -1,24 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, Text, ScrollView } from 'react-native';
-import { MoodItemRow } from '../Components/MoodItemRow';
-import { MoodPickerEmojies } from '../Components/MoodPickerEmojies';
-import { MoodOptionType, MoodOptionWithTimeType } from '../types';
+import { StyleSheet, View,} from 'react-native';
+import { MoodPickerEmojies } from '../Components/MoodPickerEmojies';  
+import { useAppContext } from '../context/App.Context.Provider';
 
 export const Home: React.FC = () => {
-  const[moodList, setMoodList] = React.useState<MoodOptionWithTimeType[]>([]);
-  
-  const selectedMoodList = React.useCallback((moodSelected: MoodOptionType) =>{
-    setMoodList(current => [...current , {mood: moodSelected , timeStamp: Date.now()}])   
-  },[])
+  const setContext = useAppContext();
 
   return (
     <View style={styles.container}>
-      <MoodPickerEmojies getMoodList={selectedMoodList}/>
-      <ScrollView>
-        {moodList.map(item=>
-        <MoodItemRow item={item}  key={item.timeStamp}/>
-        )}
-      </ScrollView>
+      <MoodPickerEmojies getMoodList={setContext.selectedMoodList}/>
     </View>
   );
 }

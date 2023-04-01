@@ -26,7 +26,10 @@ export const MoodPickerEmojies: React.FC<MoodPickerProps> = ({ getMoodList }) =>
     const updateAndClear = React.useCallback(() => {
         if (selectedMood) {
             getMoodList(selectedMood)
-            setSelectedMood(undefined)
+            
+            setTimeout(() => {
+                setSelectedMood(undefined)
+            }, 30);
         }
         else{
             ToastAndroid.show('PLease, Select Mood.', ToastAndroid.SHORT);
