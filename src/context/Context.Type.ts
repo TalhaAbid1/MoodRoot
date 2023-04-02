@@ -8,3 +8,7 @@ export type AppContextType = {
 export type Props = {
     children: React.ReactNode;
 }
+
+export type AppData = {
+    moodList: MoodOptionWithTimeType[];
+}

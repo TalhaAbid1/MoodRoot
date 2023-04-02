@@ -1,8 +1,31 @@
 import React, {createContext} from "react";
 import { MoodOptionType, MoodOptionWithTimeType } from "../types";
-import { AppContextType, Props } from "./Context.Type";
+import { AppContextType, AppData, Props } from "./Context.Type";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export const AppContext = createContext<AppContextType>({
+const storageInDeviceKey = 'moodroot-app-data';
+
+const setAppData = async (appdata: AppData):Promise<void> => {
+    // try {
+        await AsyncStorage.setItem(storageInDeviceKey , JSON.stringify(appdata))
+    // } catch (error) {console.log("Here Is AN Error For ABID By SET function : " + error)}
+}
+
+const getAppData =async (): Promise<AppData | null> => {
+    try {
+        const isGet = await AsyncStorage.getItem(storageInDeviceKey);
+        // Following If Is A Check Whether There IS Data Available Or Not 
+        // &
+        // If Available Just Bring It, Convert It By JSON.parse() And return It 
+        if (isGet) {
+            return(JSON.parse(isGet))
+        }
+    } catch (error) {console.log("Here Is An Error For ABID By GET Function : " + error)}
+
+    return null;
+}
+
+const AppContext = createContext<AppContextType>({
     moodList: [],
     selectedMoodList: () => {}
 });
@@ -12,9 +35,27 @@ export const AppProvider: React.FC<Props> = ({children}) => {
     const[moodList, setMoodList] = React.useState<MoodOptionWithTimeType[]>([]);
   
     const selectedMoodList = React.useCallback((moodSelected: MoodOptionType) =>{
-    setMoodList(current => [...current , {mood: moodSelected , timeStamp: Date.now()}])   
+    setMoodList(current =>{
+        const newMoodListValue = [
+            ...current ,
+            {mood: moodSelected , timeStamp: Date.now()},
+        ];
+        setAppData({moodList:newMoodListValue})
+        return newMoodListValue;
+    })
     },[])
     
+    React.useEffect(()=>{
+        const fetchAppData = async () => {
+            const initialEffectData = await getAppData();
+            if(initialEffectData){
+                setMoodList(initialEffectData.moodList)
+            }
+        };
+
+        fetchAppData();
+    },[])
+
     return( 
         <AppContext.Provider value={{moodList , selectedMoodList}}>
             {children}
@@ -23,6 +64,8 @@ export const AppProvider: React.FC<Props> = ({children}) => {
 };
 
 export const useAppContext = () => React.useContext(AppContext);
+
+
 
 // --------------------------------------------------------------------------------------
 

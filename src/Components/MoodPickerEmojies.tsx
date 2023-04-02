@@ -13,7 +13,7 @@ const moodOptions: MoodOptionType[] = [
     { emoji: '😢', description: 'Sad' },
     { emoji: '😭', description: 'Cry' },
     { emoji: '💔', description: 'Broken' },
-    { emoji: '♥', description: 'Love' },
+    { emoji: '❤', description: 'Love' },
 ];
 
 type MoodPickerProps = {
@@ -26,10 +26,8 @@ export const MoodPickerEmojies: React.FC<MoodPickerProps> = ({ getMoodList }) =>
     const updateAndClear = React.useCallback(() => {
         if (selectedMood) {
             getMoodList(selectedMood)
-            
-            setTimeout(() => {
-                setSelectedMood(undefined)
-            }, 30);
+            setSelectedMood(undefined)
+            ToastAndroid.show( selectedMood.emoji + ' Added.', ToastAndroid.SHORT);
         }
         else{
             ToastAndroid.show('PLease, Select Mood.', ToastAndroid.SHORT);
@@ -47,8 +45,8 @@ export const MoodPickerEmojies: React.FC<MoodPickerProps> = ({ getMoodList }) =>
                             style={[
                                 styles.moodItem,
                                 option.emoji === selectedMood?.emoji
-                                    ? styles.selectedMoodItem
-                                    : undefined,
+                                    ? undefined
+                                    : styles.selectedMoodItem,
                             ]}>
                             <Text style={styles.moodText}>{option.emoji}</Text>
                         </Pressable>
