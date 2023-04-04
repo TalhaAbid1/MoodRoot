@@ -1,14 +1,20 @@
 import React from 'react';
-import { StyleSheet, View,} from 'react-native';
+import { StyleSheet, View, Image, Text} from 'react-native';
 import { MoodPickerEmojies } from '../Components/MoodPickerEmojies';  
 import { useAppContext } from '../context/App.Context.Provider';
+import { theme } from '../theme';
 
+const urlImage = 'https://images.unsplash.com/photo-1474540412665-1cdae210ae6b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1766&q=80';
 export const Home: React.FC = () => {
   const setContext = useAppContext();
 
   return (
     <View style={styles.container}>
-      <MoodPickerEmojies getMoodList={setContext.selectedMoodList}/>
+      <Image source={{uri:urlImage}} style={styles.ImageFitting} />
+      <View style={[StyleSheet.absoluteFill , {justifyContent:'center'}]}>
+        <Text style={styles.Heading}>Welcome</Text>
+        <MoodPickerEmojies getMoodList={setContext.selectedMoodList}/>
+      </View>
     </View>
   );
 }
@@ -18,6 +24,18 @@ const styles = StyleSheet.create({
         flex:1,
         justifyContent:'center',
         alignContent:'center',
-        backgroundColor:'#FFCB4C',
+    },
+    Heading:{
+      alignSelf:'center',
+      color: '#fff',
+      fontSize:50,
+      marginBottom:10,
+      padding:10,
+      fontFamily: theme.fontFamilyRegular,
+    },
+    ImageFitting:{
+      flex:1,
+      width: theme.maxWidth,
+      height: theme.maxHeight,
     },
 });

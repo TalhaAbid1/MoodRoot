@@ -1,7 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable, ToastAndroid } from "react-native";
+import { View, Text, StyleSheet, Pressable, ToastAndroid, Image } from "react-native";
 import { MoodOptionType } from "../types";
 import { theme } from "../theme";
+
+type MoodPickerProps = {
+    getMoodList: (moodOption: MoodOptionType) => void;
+}
 
 const moodOptions: MoodOptionType[] = [
     { emoji: '🧑‍💻', description: 'Studious' },
@@ -16,23 +20,36 @@ const moodOptions: MoodOptionType[] = [
     { emoji: '❤', description: 'Love' },
 ];
 
-type MoodPickerProps = {
-    getMoodList: (moodOption: MoodOptionType) => void;
-}
+const butterfliesImage = require('../../assets/images/butterflies.png');
 
 export const MoodPickerEmojies: React.FC<MoodPickerProps> = ({ getMoodList }) => {
     const [selectedMood, setSelectedMood] = React.useState<MoodOptionType>();
+    const [hasSelectedMood, setHasSelectedMood] =  React.useState<boolean>(false)
 
     const updateAndClear = React.useCallback(() => {
         if (selectedMood) {
             getMoodList(selectedMood)
             setSelectedMood(undefined)
             ToastAndroid.show( selectedMood.emoji + ' Added.', ToastAndroid.SHORT);
+            setHasSelectedMood(true)  
         }
         else{
             ToastAndroid.show('PLease, Select Mood.', ToastAndroid.SHORT);
         }
     }, [selectedMood,getMoodList])
+
+    if (hasSelectedMood) {
+        return (
+            <View style={styles.container}>
+                <Image style={styles.Butterflies} source={butterfliesImage}/>
+                <Pressable style={styles.button} onPress={()=>{
+                    setHasSelectedMood(false)
+                }}>
+                    <Text style={styles.buttonText}>Choose Another!</Text>
+                </Pressable>
+            </View>            
+        )
+    }
 
     return (
         <View style={styles.container}>
@@ -97,6 +114,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
         padding: 20,
+        backgroundColor: 'rgba(255, 203, 76,0.3)'
     },
     heading: {
         fontSize: 23,
@@ -104,7 +122,7 @@ const styles = StyleSheet.create({
         letterSpacing: 1,
         textAlign: 'center',
         marginBottom: 20,
-        color: '#000',
+        color: theme.colorWhite,
     },
     button: {
         backgroundColor: theme.colorPurple,
@@ -119,5 +137,8 @@ const styles = StyleSheet.create({
         color: theme.colorWhite,
         textAlign: 'center',
         fontWeight: 'bold',
+    },
+    Butterflies:{
+        alignSelf:'center',
     },
 })

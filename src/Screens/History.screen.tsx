@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, ScrollView, View, TouchableOpacity, Text } from 'react-native';
 import { MoodItemRow } from '../Components/MoodItemRow';
 import { useAppContext } from '../context/App.Context.Provider';
+import { theme } from '../theme';
 
 export const History: React.FC = () => {
   const appContext = useAppContext();
@@ -10,7 +11,7 @@ export const History: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.HistoryHead}>Mood History</Text>
       <ScrollView>
-        {appContext.moodList.map(item=>
+        {appContext.moodList.slice(0).reverse().map(item=>
         <MoodItemRow item={item}  key={item.timeStamp}/>
         )}
       </ScrollView>
