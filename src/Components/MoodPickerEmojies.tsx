@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
     },
     descriptionText: {
         color: theme.colorPurple,
-        fontWeight: 'bold',
+        fontFamily: theme.fontFamilyBold,
         fontSize: 13,
         textAlign: 'center',
     },
@@ -118,7 +118,7 @@ const styles = StyleSheet.create({
     },
     heading: {
         fontSize: 23,
-        fontWeight: 'bold',
+        fontFamily: theme.fontFamilyRegular,
         letterSpacing: 1,
         textAlign: 'center',
         marginBottom: 20,
@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
     buttonText: {
         color: theme.colorWhite,
         textAlign: 'center',
-        fontWeight: 'bold',
+        fontFamily: theme.fontFamilyBold,
     },
     Butterflies:{
         alignSelf:'center',
