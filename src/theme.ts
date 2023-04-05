@@ -6,10 +6,10 @@ export const theme = {
     maxHeight:Dimensions.get('window').height,
 
   // COLORS
-    colorPurple: '#454C73',
+    colorPurple: '#606aa1',
     colorWhite: '#ffffff',
     colorBlack: '#000000',
-    colorLavender: '#87677B',
+    colorLavender: '#abb6ff',
     colorRed: '#990011ff',
 
   // FONTS

@@ -14,7 +14,7 @@ export const History: React.FC = () => {
       <Image source={{uri:urlImageHistory}} style={styles.ImageFitting}/>
       <View style={[StyleSheet.absoluteFill , {justifyContent:'center'}]}>
         <Text style={styles.HistoryHead}>Mood History</Text>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           {appContext.moodList.slice(0).reverse().map(item=>
           <MoodItemRow item={item}  key={item.timeStamp}/>
           )}

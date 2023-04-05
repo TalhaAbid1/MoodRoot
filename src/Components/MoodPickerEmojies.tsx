@@ -1,7 +1,10 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable, ToastAndroid, Image } from "react-native";
+import { View, Text, StyleSheet, Pressable, ToastAndroid, Image, } from "react-native";
 import { MoodOptionType } from "../types";
 import { theme } from "../theme";
+import Reanimated, {useAnimatedStyle, withTiming} from "react-native-reanimated";
+
+const AnimatedPressable = Reanimated.createAnimatedComponent(Pressable)
 
 type MoodPickerProps = {
     getMoodList: (moodOption: MoodOptionType) => void;
@@ -22,9 +25,15 @@ const moodOptions: MoodOptionType[] = [
 
 const butterfliesImage = require('../../assets/images/butterflies.png');
 
+
 export const MoodPickerEmojies: React.FC<MoodPickerProps> = ({ getMoodList }) => {
     const [selectedMood, setSelectedMood] = React.useState<MoodOptionType>();
     const [hasSelectedMood, setHasSelectedMood] =  React.useState<boolean>(false)
+
+    const animateStyle = useAnimatedStyle(()=>({
+        opacity : selectedMood ? withTiming(1) : withTiming(0.5),
+        transform:[{scale: selectedMood ? withTiming(1.2) : withTiming(1), }]
+    }),[selectedMood])
 
     const updateAndClear = React.useCallback(() => {
         if (selectedMood) {
@@ -73,9 +82,9 @@ export const MoodPickerEmojies: React.FC<MoodPickerProps> = ({ getMoodList }) =>
                     </View>
                 ))}
             </View>
-            <Pressable style={styles.button} onPress={updateAndClear}>
+            <AnimatedPressable style={[styles.button , animateStyle]} onPress={updateAndClear}>
                 <Text style={styles.buttonText}>Choose</Text>
-            </Pressable>
+            </AnimatedPressable>
         </View>
     );
 }

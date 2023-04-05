@@ -14,7 +14,7 @@ export const Home: React.FC = () => {
       <Image source={{uri:urlImageHome}} style={styles.ImageFitting} />
       <View style={[StyleSheet.absoluteFill , {justifyContent:'center'}]}>
         {/* Self Created Custom Text */}
-        <SelfCustomizedText fontFamily={'bold'} style={styles.Heading} >ABID</SelfCustomizedText>
+        <SelfCustomizedText fontFamily={'bold'} style={styles.Heading}>Mood Root</SelfCustomizedText>
         <MoodPickerEmojies getMoodList={setContext.selectedMoodList}/>
       </View>
     </View>
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     alignSelf:'center',
     color: theme.colorWhite,
     backgroundColor:'rgba(219, 204, 204,0.7)',      
-    fontSize:30,
+    fontSize:23,
     top:13,
     paddingHorizontal:10,
     borderRadius:10,
