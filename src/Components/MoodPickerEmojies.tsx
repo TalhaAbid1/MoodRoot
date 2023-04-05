@@ -95,7 +95,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 30,
-        marginBottom: 5,
     },
     selectedMoodItem: {
         borderWidth: 2,
@@ -103,10 +102,11 @@ const styles = StyleSheet.create({
         borderColor: theme.colorWhite,
     },
     descriptionText: {
-        color: theme.colorPurple,
+        color: theme.colorWhite,
         fontFamily: theme.fontFamilyBold,
         fontSize: 13,
         textAlign: 'center',
+        marginBottom:10,
     },
     container: {
         borderWidth: 2,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
         margin: 10,
         borderRadius: 10,
         padding: 20,
-        backgroundColor: 'rgba(255, 203, 76,0.3)'
+        backgroundColor: 'rgba(1, 25, 64,0.5)',
     },
     heading: {
         fontSize: 23,

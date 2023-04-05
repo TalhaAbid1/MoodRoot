@@ -7,8 +7,10 @@ export const theme = {
 
   // COLORS
     colorPurple: '#454C73',
-    colorWhite: '#fff',
+    colorWhite: '#ffffff',
+    colorBlack: '#000000',
     colorLavender: '#87677B',
+    colorRed: '#990011ff',
 
   // FONTS
     fontFamilyBold: 'Kalam-Bold',

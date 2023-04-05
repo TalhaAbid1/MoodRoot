@@ -27,7 +27,8 @@ const getAppData =async (): Promise<AppData | null> => {
 
 const AppContext = createContext<AppContextType>({
     moodList: [],
-    selectedMoodList: () => {}
+    selectedMoodList: () => {},
+    handleDeleteMood: () => {}
 });
 
 export const AppProvider: React.FC<Props> = ({children}) => {
@@ -44,6 +45,14 @@ export const AppProvider: React.FC<Props> = ({children}) => {
         return newMoodListValue;
     })
     },[])
+
+    const handleDeleteMood = React.useCallback((moodDeleted : MoodOptionWithTimeType)=>{
+        setMoodList(current=>{
+            const updateAfterDeletion = current.filter(Selectedvalue => Selectedvalue.timeStamp !== moodDeleted.timeStamp )
+            setAppData({moodList : updateAfterDeletion})
+            return updateAfterDeletion;
+        })
+    },[])
     
     React.useEffect(()=>{
         const fetchAppData = async () => {
@@ -57,7 +66,7 @@ export const AppProvider: React.FC<Props> = ({children}) => {
     },[])
 
     return( 
-        <AppContext.Provider value={{moodList , selectedMoodList}}>
+        <AppContext.Provider value={{moodList , selectedMoodList , handleDeleteMood}}>
             {children}
         </AppContext.Provider>
     );

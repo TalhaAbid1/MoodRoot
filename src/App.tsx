@@ -2,8 +2,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { StyleSheet, StatusBar } from 'react-native';
 import { AppProvider } from './context/App.Context.Provider';
-// import { AppContext } from './context/App.Context.Provider';
 import { BottomTab } from './Screens/BottomTabNavigatior';
+// import { AppContext } from './context/App.Context.Provider';
+
+// Followign 6 Lines Are Necessary To Include If You Need TO add "LayoutAnimation From React-native" in Android 
+import { Platform, UIManager } from 'react-native';
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 export const App: React.FC = () => {
   return (

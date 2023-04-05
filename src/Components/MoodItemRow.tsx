@@ -1,14 +1,23 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Pressable, LayoutAnimation} from 'react-native';
 import format from 'date-fns/format';
 import { MoodOptionWithTimeType } from '../types';
 import { theme } from '../theme';
+import { useAppContext } from '../context/App.Context.Provider';
 
 type MoodItemRowProps = {
   item: MoodOptionWithTimeType,
 };
 
 export const MoodItemRow: React.FC<MoodItemRowProps> = ({ item }) => {
+  
+  const contextForDeleteFunction = useAppContext();
+  
+  const handleDelete = React.useCallback(()=>{
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+    contextForDeleteFunction.handleDeleteMood(item);
+  },[contextForDeleteFunction, item, LayoutAnimation])
+
   return (
     <View style={styles.moodItem}>
       <View style={styles.iconAndDescription}>
@@ -18,6 +27,9 @@ export const MoodItemRow: React.FC<MoodItemRowProps> = ({ item }) => {
       <Text style={styles.moodDate}>
         {format(new Date(item.timeStamp), "dd MMM, yyyy 'at' h:mm a")}
       </Text>
+      <Pressable hitSlop={6} onPress={handleDelete} >
+        <Text style={styles.deleteText}>Delete</Text>
+      </Pressable>
     </View>
   );
 };
@@ -31,10 +43,10 @@ const styles = StyleSheet.create({
   moodDate: {
     textAlign: 'center',
     color: theme.colorLavender,
-    fontFamily: theme.fontFamilyRegular,
+    fontFamily: theme.fontFamilyLight,
   },
   moodItem: {
-    backgroundColor: '#ffe7b0',
+    backgroundColor: 'rgba(0,0,0,0.8)',
     marginBottom: 10,
     padding: 10,
     flexDirection: 'row',
@@ -52,5 +64,15 @@ const styles = StyleSheet.create({
   iconAndDescription: {
     flexDirection: 'row',
     alignItems: 'center',
+  },
+  deleteText:{
+    color:theme.colorRed,
+    fontFamily:theme.fontFamilyRegular,
+    borderColor:theme.colorBlack,
+    padding:1,
+    borderWidth:1,
+    borderRadius:7,
+    textAlign:'center',
+    verticalAlign:'bottom',
   },
 });
