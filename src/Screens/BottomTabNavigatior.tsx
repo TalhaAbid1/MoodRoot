@@ -17,7 +17,7 @@ export const BottomTab: React.FC = () => {
       tabBarShowLabel:false,
       headerShown: false,
       tabBarStyle: {
-        backgroundColor: '#454c73',
+        backgroundColor: '#1D84B5',
         paddingTop:5,
         height:50,
         paddingBottom: 3,

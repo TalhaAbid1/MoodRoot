@@ -89,12 +89,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderRadius:15,
-    borderColor:theme.colorPurple,
+    borderColor:theme.colorParentBlue,
     borderWidth:1,
   },
   moodDescription: {
     fontSize: 18,
-    color: theme.colorPurple,
+    color: theme.colorParentBlue,
     fontFamily: theme.fontFamilyBold,
   },
   iconAndDescription: {

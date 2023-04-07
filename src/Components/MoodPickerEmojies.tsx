@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     },
     selectedMoodItem: {
         borderWidth: 2,
-        backgroundColor: theme.colorPurple,
+        backgroundColor: theme.colorParentBlue,
         borderColor: theme.colorWhite,
     },
     descriptionText: {
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     },
     container: {
         borderWidth: 2,
-        borderColor: theme.colorPurple,
+        borderColor: theme.colorParentBlue,
         margin: 10,
         borderRadius: 10,
         padding: 20,
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
         color: theme.colorWhite,
     },
     button: {
-        backgroundColor: theme.colorPurple,
+        backgroundColor: theme.colorParentBlue,
         width: 150,
         borderRadius: 20,
         marginTop: 20,
