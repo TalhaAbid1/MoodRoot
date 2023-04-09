@@ -64,7 +64,7 @@ export const MoodPickerEmojies: React.FC<MoodPickerProps> = ({ getMoodList }) =>
         <View style={styles.container}>
             <Text style={styles.heading}>How's your mood right now?</Text>
             <View style={styles.moodList}>
-                {moodOptions.map(option => (
+                {moodOptions.slice().reverse().map(option => (
                     <View key={option.emoji}>
                         <Pressable
                             onPress={() => setSelectedMood(option)}
